@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         /*
-         *      实验二 
+         *      实验二
          *  在ativity之间的转跳，并拿到数据
          *
          *
@@ -80,15 +80,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, secondActivity.class);
-                intent.putExtra("name","张三");
-                intent.putExtra("age",20);
-                startActivityForResult(intent,1001);
+                intent.putExtra("name", "张三");
+                intent.putExtra("age", 20);
+                startActivityForResult(intent, 1001);
             }
         });
 
+        /*
+         *   实验三
+         * 实现intent的隐式启动
+         * 转跳到acticity3
+         *
+         *
+         * */
+        Button turnTo3 = findViewById(R.id.turnTo3);
+        turnTo3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction("startAnotherActivity");
+//                intent.addCategory("my_category");
+                startActivity(intent);
+            }
+        });
 
-
-        
 
     }
 
@@ -97,11 +112,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode){
+        switch (requestCode) {
             case 1001:
-                if (resultCode == 1001){
+                if (resultCode == 1001) {
                     String con = data.getStringExtra("ok");
-                    Toast.makeText(MainActivity.this,con,Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, con, Toast.LENGTH_LONG).show();
                 }
                 break;
         }

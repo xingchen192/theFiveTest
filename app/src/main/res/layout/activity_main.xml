@@ -10,27 +10,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/tip"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="提示" />
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="登录" />
+            <Button
+                android:id="@+id/tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="提示" />
 
-        <Button
-            android:id="@+id/turnTo"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="登录" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="转跳" />
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/turnTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="显示转跳" />
+
+            <Button
+                android:id="@+id/turnTo3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="隐式转跳" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

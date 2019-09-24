@@ -10,19 +10,22 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
+
         <TextView
+            android:id="@+id/content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="第3个activity"
             android:layout_gravity="center"
-            android:textSize="30dp"
+            android:text="隐式启动的activity"
             android:textColor="#990876"
-            />
+            android:textSize="30dp" />
+
         <Button
+            android:id="@+id/turnTo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="转跳"/>
+            android:text="转跳" />
 
     </LinearLayout>
 
