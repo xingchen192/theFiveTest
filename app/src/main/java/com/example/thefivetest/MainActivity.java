@@ -1,9 +1,11 @@
 package com.example.thefivetest;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +20,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        /*
+         *      第一个实验
+         *      对话框登录
+         *
+         *
+         */
         Button tip = findViewById(R.id.tip);
         tip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"请登录",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "请登录", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -44,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         EditText editText2 = view1.findViewById(R.id.user_pwd);
-                        String id,pwd;
+                        String id, pwd;
                         EditText editText1 = view1.findViewById(R.id.user_id);
                         if (editText1 != null && editText2 != null) {
                             id = editText1.getText().toString();
@@ -60,8 +69,42 @@ public class MainActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+        /*
+         *      实验二 
+         *  在ativity之间的转跳，并拿到数据
+         *
+         *
+         */
+        Button turnTo = findViewById(R.id.turnTo);
+        turnTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, secondActivity.class);
+                intent.putExtra("name","张三");
+                intent.putExtra("age",20);
+                startActivityForResult(intent,1001);
+            }
+        });
 
 
+
+        
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case 1001:
+                if (resultCode == 1001){
+                    String con = data.getStringExtra("ok");
+                    Toast.makeText(MainActivity.this,con,Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
 
     }
 }

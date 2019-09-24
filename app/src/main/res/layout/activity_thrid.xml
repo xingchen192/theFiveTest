@@ -4,33 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".thridActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/tip"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="第3个activity"
             android:layout_gravity="center"
-            android:text="提示" />
-
+            android:textSize="30dp"
+            android:textColor="#990876"
+            />
         <Button
-            android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="登录" />
-
-        <Button
-            android:id="@+id/turnTo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="转跳" />
+            android:layout_margin="20dp"
+            android:text="转跳"/>
 
     </LinearLayout>
 
