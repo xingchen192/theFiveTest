@@ -13,6 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+
+import java.io.FileInputStream;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.io.OutputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -103,10 +114,57 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        /*
+         *   实验四
+         * 实现向内部储存中写入和读取数据
+         *
+         * */
 
+        Button writeTo = findViewById(R.id.writeToSD);
+        writeTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OutputStream out;
+                try {
+                    FileOutputStream fos = openFileOutput("info.txt", MODE_PRIVATE);
+                    out = new BufferedOutputStream(fos);
+                    try {
+                        out.write("zhangsan,IdNumber: 12345678".getBytes());
+                    } finally {
+                        out.close();
+                    }
+//                    fos.write("张三，学号：12345678".getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
+        });
+
+        Button readBtn = findViewById(R.id.readToSD);
+        readBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputStream in;
+                try {
+                    FileInputStream fileInputStream = openFileInput("info.txt");
+                    in = new BufferedInputStream(fileInputStream);
+                    int c;
+                    StringBuilder stringBuilder = new StringBuilder("");
+                    try {
+                        while ((c = in.read()) != -1) {
+                            stringBuilder.append((char) c);
+                        }
+                        Toast.makeText(MainActivity.this, stringBuilder.toString(), Toast.LENGTH_LONG).show();
+                    } finally {
+                        in.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
