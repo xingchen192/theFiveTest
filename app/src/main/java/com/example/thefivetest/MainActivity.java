@@ -7,6 +7,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -164,6 +169,58 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        /*
+         *
+         *   实验五
+         *使用handler处理消息
+         *
+         * */
+        initData();
+
+    }
+
+    private static final String TAG = "TestHandlerActivity";
+    //主线程中的handler
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            //获得刚才发送的Message对象，然后在这里进行UI操作
+            Log.e(TAG, "------------> msg.what = " + msg.what);
+        }
+    };
+    //子线程中的handler
+    private Handler mHandlerThread = null;
+
+    private void initData() {
+
+        //开启一个线程模拟处理耗时的操作
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                SystemClock.sleep(4*1000);
+                //通过Handler发送一个消息切换回主线程（mHandler所在的线程）
+                mHandler.sendEmptyMessage(0);
+
+                //调用Looper.prepare（）方法
+                Looper.prepare();
+
+                //在子线程中创建Handler
+                mHandlerThread = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        super.handleMessage(msg);
+                        Log.e("sub thread", "---------> msg.what = " + msg.what);
+                    }
+                };
+                mHandlerThread.sendEmptyMessage(1);
+
+                //调用Looper.loop（）方法
+                Looper.loop();
+            }
+        }).start();
+
     }
 
     @Override
